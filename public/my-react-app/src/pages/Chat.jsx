@@ -24,7 +24,7 @@ export default function Chat() {
           navigate('/login');
         } else {
           const userData = JSON.parse(localStorage.getItem('chat-app-user'));
-          console.log('User Data:', userData);
+          
           
           setCurrentUser(userData);
   

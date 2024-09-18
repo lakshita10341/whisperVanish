@@ -20,8 +20,6 @@ mongoose.connect(process.env.MONGO_URL,{
 
     useNewUrlParser: true,
     useUnifiedTopology: true,
-
-    
   
 }).then(()=>{
     console.log("DB connection successful");
@@ -35,7 +33,7 @@ const server = app.listen(process.env.PORT,()=>{
 
 const io = new socket(server, {
     cors:{
-        origin: true,
+        origin: "*",
         credentials: true,
 
     },
