@@ -121,6 +121,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 const Container = styled.div`
   padding: 1rem;
   display: grid;
+  overflow:hidden;
   grid-template-rows: 8% 84% 8%;
   .chat-header {
     display: flex;
@@ -148,7 +149,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    overflow: auto;
+    overflow-y: auto;
     &::-webkit-scrollbar{
       width: 0.2rem;
       &-thumb{
