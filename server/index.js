@@ -35,7 +35,7 @@ const server = app.listen(process.env.PORT,()=>{
 
 const io = new socket(server, {
     cors:{
-        origin: "https://whisper-vanish-iorx-6wh6uppuu-lakshitas-projects-24c514b2.vercel.app/",
+        origin: true,
         credentials: true,
 
     },
