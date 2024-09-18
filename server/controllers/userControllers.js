@@ -1,17 +1,17 @@
-const User = require("../model/userModel");
-const bcrypt = require("bcryptjs");
+import Users from '../model/userModel.js'
+import bcrypt from 'bcryptjs'
 
-module.exports.register = async (req, res, next) => {
+export const register = async (req, res, next) => {
     try {
       const { Username, email, password } = req.body;
-      const usernameCheck = await User.findOne({ Username });
+      const usernameCheck = await Users.findOne({ Username });
       if (usernameCheck)
         return res.json({ msg: "Username already used", status: false });
-      const emailCheck = await User.findOne({ email });
+      const emailCheck = await Users.findOne({ email });
       if (emailCheck)
         return res.json({ msg: "Email already used", status: false });
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user = await User.create({
+      const user = await Users.create({
         Username,
         email,
         
@@ -24,10 +24,11 @@ module.exports.register = async (req, res, next) => {
     }
   };
 
-  module.exports.login = async (req, res, next) => {
+  export const login = async (req, res, next) => {
+
     try {
       const { Username, password } = req.body;
-      const user = await User.findOne({ Username });
+      const user = await Users.findOne({ Username });
       if (!user)
         return res.json({ msg: "Incorrect username or password", status: false });
       const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -41,14 +42,11 @@ module.exports.register = async (req, res, next) => {
       next(ex);
     } 
   };
-
-
-
-module.exports.setAvatar = async (req, res, next) => {
+export const setAvatar = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const avatarImage = req.body.image;
-    const userData = await User.findByIdAndUpdate(
+    const userData = await Users.findByIdAndUpdate(
       userId,
       {
         isAvatarImageSet: true,
@@ -65,9 +63,9 @@ module.exports.setAvatar = async (req, res, next) => {
   }
 };
 
-module.exports.getAllUsers = async(req,res,next)=>{
+export const getAllUsers = async(req,res,next)=>{
   try{
-    const users = await User.find({_id:{$ne :req.params.id }}).select([
+    const users = await Users.find({_id:{$ne :req.params.id }}).select([
       "Username",
       "email",
       "avatarImage",

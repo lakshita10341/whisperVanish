@@ -1,6 +1,6 @@
-const mongoose =require("mongoose");
-const Users = require("./userModel");
-// console.log(Users);
+import mongoose from "mongoose";
+import Users from './userModel.js'
+// console.log(Users)   ;
 const msgSchema = mongoose.Schema({
     message :{
         text:{
@@ -22,4 +22,4 @@ const msgSchema = mongoose.Schema({
     }
 );
 
-module.exports = mongoose.model("messages",msgSchema);
+export default mongoose.model("messages",msgSchema);

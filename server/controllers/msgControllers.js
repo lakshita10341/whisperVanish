@@ -1,7 +1,7 @@
-const msgModel = require("../model/msgModel");
+import msgModel from '../model/msgModel.js'
 
 
-module.exports.addMsg = async(req,res,next)=>{
+export const addMsg = async(req,res,next)=>{
     try{
         const {from, to, message} = req.body;
 
@@ -23,7 +23,7 @@ module.exports.addMsg = async(req,res,next)=>{
 };
 
 
-module.exports.getAllMsg = async(req,res,next)=>{
+export const getAllMsg = async(req,res,next)=>{
         try{
             const {from, to} = req.body;
             const messages = await msgModel.find({
